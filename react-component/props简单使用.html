@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>props简单使用</title>
+  <script src="https://cdn.bootcss.com/react/16.13.1/umd/react.development.js"></script>
+  <script src="https://cdn.bootcss.com/react-dom/16.13.1/umd/react-dom.development.js"></script>
+  <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    
+    class MyProps extends React.Component {
+      render(){
+        return (
+          <h1> Hello,{this.props.name} </h1>
+        );
+      }
+    }
+
+    ReactDOM.render(<MyProps name="千万不要忘记在script标签添加type='text/babel'！不然Babel无法执行的！" />,
+                    document.getElementById('root'));
+
+  </script>
+</body>
+</html>
