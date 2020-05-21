@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>内部初始化props</title>
+  <script src="https://cdn.bootcss.com/react/16.13.1/umd/react.development.js"></script>
+  <script src="https://cdn.bootcss.com/react-dom/16.13.1/umd/react-dom.development.js"></script>
+  <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>  
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+  class DefaultProps extends React.Component {
+    static defaultProps = {
+      name : 'default props'
+    }
+    render(){
+      return (
+        <h3>hello, my {this.props.name}</h3>
+      );
+    }
+  }
+  ReactDOM.render(<DefaultProps />,
+                  document.getElementById('root'));
+  </script>
+</body>
+</html>
