@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>利用state改变DOM元素颜色</title>
+  <script src="https://cdn.bootcss.com/react/16.13.1/umd/react.development.js"></script>
+  <script src="https://cdn.bootcss.com/react-dom/16.13.1/umd/react-dom.development.js"></script>
+  <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    class ChangeColor extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {isRed: true};
+        this.handleClick = this.handleClick.bind(this);
+      }
+
+      handleClick() {
+        this.setState((prevState,props) => ({
+          isRed: !prevState.isRed
+        }));
+      }
+
+      render() {
+        var redStyle = {
+          color: "red"
+        }
+
+        var blueStyle = {
+          color: "blue"
+        }
+
+        return (
+          <div>
+            <h1 style={this.state.isRed ? redStyle:blueStyle}>利用state改变DOM元素颜色</h1>
+            <button onClick={this.handleClick}>点击改变颜色</button>
+          </div>
+
+        );
+      }
+    }
+    ReactDOM.render(<ChangeColor />,document.getElementById('root'));
+  </script>
+</body>
+</html>
