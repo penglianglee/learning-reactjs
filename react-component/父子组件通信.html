@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>父子组件通信</title>
+  <script src="https://cdn.bootcss.com/react/16.13.1/umd/react.development.js"></script>
+  <script src="https://cdn.bootcss.com/react-dom/16.13.1/umd/react-dom.development.js"></script>
+  <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>  
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    class Child extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {}
+      }
+
+      render() {
+        return (
+          <div>
+            <button onClick={this.props.refreshParent}>
+              更新父组件
+            </button>
+          </div>
+        )
+      }
+    }
+
+    class Father extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {}
+      }
+
+      refreshParent() {
+        this.setState({
+          parentText:"子组件更新父组件，需要父组件传一个回调函数给子组件，然后子组件调用",
+        })
+      }
+
+      render(){
+        return(
+          <div>
+            <Child refreshParent= {this.refreshParent.bind(this)} />
+              {this.state.parentText || "父组件更新前"}
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(<Father />, document.getElementById('root'));
+  </script>
+</body>
+</html>
