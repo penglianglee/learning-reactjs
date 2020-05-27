@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>同级组件通信</title>
+  <script src="https://cdn.bootcss.com/react/16.13.1/umd/react.development.js"></script>
+  <script src="https://cdn.bootcss.com/react-dom/16.13.1/umd/react-dom.development.js"></script>
+  <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>  
+  <script type="text/babel">
+    class Brother1 extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {}
+      }
+
+      render() {
+        return (
+          <div>
+            <button onClick={this.props.refresh}>
+              更新兄弟组件
+            </button>
+          </div>
+        )
+      }
+    }
+    class Brother2 extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {}
+      }
+
+      render() {
+        return (
+          <div>
+            {this.props.text || "兄弟组件未更新"}
+          </div>
+        )
+      }
+    }
+    class Father extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {}
+      }
+
+      refresh() {
+        return (e) => {
+          this.setState({
+            text: "兄弟组件通信成功",
+          })
+        }
+      }
+
+      render() {
+        return (
+          <div>
+            <h2>兄弟组件沟通</h2>
+            <Brother1 refresh={this.refresh()}/>
+            <Brother2 text={this.state.text}/>
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(<Father/>,document.getElementById('root'));
+  </script>
+</body>
+</html>
