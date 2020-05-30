@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript事件三阶段</title>
+</head>
+<body>
+  <pre>
+    JavaSript事件的触发大概分为三个阶段：
+    - 事件捕获阶段：事件从文档的根节点出发，向其子节点延伸，遇到相同注册
+      事件立即触发，直到目标节点为止
+    - 事件处理阶段：事件到达目标节点，触发事件。
+    - 事件冒泡阶段：事件离开目标节点返回到文档根节点，并在路途上遇到相同
+      注册事件再次触发
+    
+    即: 捕获事件，从根节点出发到目标节点，执行沿途相同的已注册的捕获事件；
+        冒泡事件，从目标节点返回根节点，执行沿途相同的已注册的冒泡事件；
+
+    addEventListener方法的最后一个参数可以指定事件为捕获还是冒泡，即：
+    - obj.addEventListener('click',func,true);捕获方式
+    - obj.addEventListener('click',func,false);冒泡方式
+
+    点击下列节点，打开console查看事件触发的三个阶段：
+  </pre>
+  <div id="FDiv">
+     父节点
+    <div id="SDiv">
+      子节点
+      <div id="GSDiv">
+        孙节点
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    var f = document.getElementById('FDiv');
+    var s = document.getElementById('SDiv');
+    var g = document.getElementById('GSDiv');
+    f.addEventListener('click', function(){
+      console.log('1. 父节点 向下捕获阶段');
+    },true);
+    s.addEventListener('click', function(){
+      console.log('2. 子节点 向下捕获阶段');
+    },true);
+    g.addEventListener('click', function(){
+      console.log('3. 孙节点 向下捕获阶段');
+    },true);
+    f.addEventListener('click', function(){
+      console.log('4. 父节点 向上冒泡阶段');
+    },false);
+    s.addEventListener('click', function(){
+      console.log('5. 子节点 向上冒泡阶段');
+    },false);
+    g.addEventListener('click', function(){
+      console.log('6. 孙节点 向上冒泡阶段');
+    },false);
+    
+  </script>
+</body>
+</html>
