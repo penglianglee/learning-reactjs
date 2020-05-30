@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>事件循环</title>
+</head>
+<body>
+  <div>打开console控制台查看执行顺序</div>
+  <script type="text/javascript">
+    function fn1() {
+      console.log('1. 主线程执行');
+    }
+    function fn2() {
+      setTimeout(function() {
+        console.log('2. 先放入事件队列，等执行栈全部执行完后，执行该方法');
+      })
+    }
+    function fn3() {
+      console.log('3. 主线程执行');
+    }
+    fn1();
+    fn2();
+    fn3();
+  </script>
+</body>
+</html>
