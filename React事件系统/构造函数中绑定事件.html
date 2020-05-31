@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>构造函数中绑定事件</title>
+  <script src="https://cdn.bootcss.com/react/16.13.1/umd/react.development.js"></script>
+  <script src="https://cdn.bootcss.com/react-dom/16.13.1/umd/react-dom.development.js"></script>
+  <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    class Hello extends React.Component {
+      constructor(props){
+        super(props);
+        this.showName = this.showName.bind(this);
+        //构造函数中this关键字声明事件
+      }
+
+      showName() {
+        alert('Hello React!');
+      }
+
+      render() {
+        return(
+          <div>
+            <button onClick= { this.showName}>点击事件</button>
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(<Hello /> , document.getElementById('root'));
+  </script>
+</body>
+</html>
