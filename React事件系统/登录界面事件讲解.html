@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>登录界面事件讲解</title>
+  <script src="https://cdn.bootcss.com/react/16.13.1/umd/react.development.js"></script>
+  <script src="https://cdn.bootcss.com/react-dom/16.13.1/umd/react-dom.development.js"></script>
+  <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body style="background-color: #ccc;">
+  <div id="root"></div>
+  <script type="text/babel">
+    class Login extends React.Component {
+      constructor(props) {
+        super(props);
+        this.login = this.login.bind(this);
+        this.check = this.check.bind(this);
+        this.state = {
+          userName : "admin",
+          passWord : "admin"
+        }
+      }
+
+      login() {
+        if(this.refs.user.value === this.state.userName&&
+        this.refs.pwd.value===this.state.passWord) {
+          alert('登录成功！');
+        }
+        else {
+          alert('登录失败');
+        }
+      }
+
+      check() {
+        if(this.refs.user.value.length > 10){
+          alert('超出10个字符，请重新输入！');
+          this.refs.user.value="";
+        }
+
+      }
+
+      render() {
+        var loginStyle = {
+          width: 400,
+          height: 250,
+          background: "#fff",
+          margin: "200px auto",
+          position: "relative"
+        };
+        var hStyle = {
+          position: "absolute",
+          left: 95,
+          top: -40,
+          padding: 0,
+          margin: 50,
+        };
+        var pStyle = {
+          textAlign: "center"
+        };
+        var userStyle = {
+          width: 200,
+          height: 30,
+          border: "1px solid #ccc",
+          borderRadius: 3,
+          paddingLeft : 32,
+          marginTop: 50,
+        };
+        var pwdStyle = {
+          width: 200,
+          height: 30,
+          border: "1px solid #ccc",
+          borderRadius: 3,
+          paddingLeft : 32,
+          marginTop: 5,
+        };
+        var buttonStyle = {
+          width: 232,
+          height: 30,
+          background: "#E9E9E9",
+          border: "1px solid #ccc",
+          borderRadius: 3,
+          textAlign: "center"
+        };
+        return (
+          <div style={loginStyle}>
+            <h1 style={hStyle}>登录界面</h1>
+            <div>
+              <p style={pStyle}><input type="text" style={userStyle} placeholder="用户名" ref="user" onChange={this.check} /></p>
+              <p style={pStyle}><input type="password" style={pwdStyle} placeholder="密码" ref="pwd" /></p>
+              <p style={pStyle}><button style={buttonStyle} onClick={this.login}>登录</button></p>
+            </div>
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(<Login />,document.getElementById("root"));
+  </script>
+</body>
+</html>
