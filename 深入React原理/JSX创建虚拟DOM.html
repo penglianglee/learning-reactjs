@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JSX创建虚拟DOM</title>
+  <script src="https://cdn.bootcss.com/react/16.13.1/umd/react.development.js"></script>
+  <script src="https://cdn.bootcss.com/react-dom/16.13.1/umd/react-dom.development.js"></script>
+  <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    class List extends React.Component {
+      render() {
+        return (
+          <ul>
+            <li>React</li>
+            <li>Vue</li>
+            <li>Angular</li>
+          </ul>
+        )
+      }
+    }
+    ReactDOM.render(<List />, document.getElementById('root'));
+  </script>
+</body>
+</html>
