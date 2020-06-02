@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript创建虚拟DOM</title>
+  <script src="https://cdn.bootcss.com/react/16.13.1/umd/react.development.js"></script>
+  <script src="https://cdn.bootcss.com/react-dom/16.13.1/umd/react-dom.development.js"></script>
+  <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    class List extends React.Component {
+      render() {
+        var child1 = React.createElement('li', null, 'React');
+        var child2 = React.createElement('li', null, 'Vue');
+        var child3 = React.createElement('li', null, 'Angular');
+        return (
+          React.createElement('ul', {className: 'my-list'}, child1, child2, child3)
+        )
+      }
+    }
+    ReactDOM.render(<List />,document.getElementById('root'));
+  </script>
+</body>
+</html>
