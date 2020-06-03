@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>异步执行的setState</title>
+  <script src="https://cdn.bootcss.com/react/16.13.1/umd/react.development.js"></script>
+  <script src="https://cdn.bootcss.com/react-dom/16.13.1/umd/react-dom.development.js"></script>
+  <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>  
+  <script type="text/babel">
+    class Hello extends React.Component {
+      constructor(props) {
+        super();
+        this.state = {
+          count : 0
+        }
+        this.showState = this.showState.bind(this);
+      }
+
+      componentDidMount() {
+        this.setState({
+          count: this.state.count + 1
+        });
+        this.setState({
+          count: this.state.count + 1
+        });
+        this.setState({
+          count: this.state.count + 1
+        });
+        console.log('setState后立即显示state的值为'+this.state.count);
+      }
+
+      showState() {
+        console.log('showState 方法中的state值为'+this.state.count);
+        console.log('setState异步执行,并且在状态队列中对三次setState进行了批量处理合并,最后只执行一次,避免了重复渲染')
+      }
+
+      render() {
+        return (
+          <button onClick = {this.showState}>在console中显示当前state值</button>
+        )
+      }
+    }
+    ReactDOM.render(<Hello /> , document.getElementById('root'));
+  </script>
+</body>
+</html>
