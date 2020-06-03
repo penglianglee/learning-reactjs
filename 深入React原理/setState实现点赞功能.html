@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>setState实现点赞功能</title>
+  <script src="https://cdn.bootcss.com/react/16.13.1/umd/react.development.js"></script>
+  <script src="https://cdn.bootcss.com/react-dom/16.13.1/umd/react-dom.development.js"></script>
+  <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    class Like extends React.Component {
+      constructor(props) {
+        super();
+        this.state = {
+          isLiked : true
+        }
+        this.changeState = this.changeState.bind(this);
+      }
+
+      changeState() {
+        this.setState({
+          isLiked : !this.state.isLiked
+        })
+      }
+
+      render() {
+        return (
+          <button onClick={this.changeState}>{this.state.isLiked?'点赞':'取消点赞'}</button>
+        )
+      }
+    }
+    ReactDOM.render(<Like />, document.getElementById('root'));
+
+  </script>
+</body>
+</html>
