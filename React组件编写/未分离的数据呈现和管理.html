@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>未分离的数据呈现和管理</title>
+  <script src="https://cdn.bootcss.com/react/16.13.1/umd/react.development.js"></script>
+  <script src="https://cdn.bootcss.com/react-dom/16.13.1/umd/react-dom.development.js"></script>
+  <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+  <pre>
+    使用ajax请求获取data.json文件内容，然后将获取到的数据进行UI渲染
+    数据的呈现和管理都在一起，代码会随着数据请求的增多和数据处理的步骤增加而越来越臃肿
+  </pre>
+  <div id="root"></div>
+  <script type="text/babel">
+    class CommentList extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { languages: []}
+      }
+
+      componentDidMount() {
+        $.ajax({
+          url:'data.json',
+          dataType:'json',
+          success:function(languages){
+            this.setState({languages : languages});
+          }.bind(this)
+        });
+      }
+
+      render() {
+        return (
+          <ul>
+            {this.state.languages.map(function(language) {
+              return (
+                <ul key={language.id}>
+                  <li>{language.name}</li>
+                </ul>
+              )
+            })}
+          </ul>
+        )
+      }
+
+    }
+    ReactDOM.render(<CommentList />, document.getElementById('root'));
+  </script>
+</body>
+</html>
