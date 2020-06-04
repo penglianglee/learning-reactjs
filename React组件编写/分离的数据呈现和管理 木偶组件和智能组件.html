@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>分离的数据呈现和管理 木偶组件和智能组件</title>
+  <script src="https://cdn.bootcss.com/react/16.13.1/umd/react.development.js"></script>
+  <script src="https://cdn.bootcss.com/react-dom/16.13.1/umd/react-dom.development.js"></script>
+  <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <pre>
+      木偶组件只关注UI呈现，不关心数据操作及来源，更像是一个UI接口，
+      通常没有自己的state属性，通过props来读取数据，木偶组件通常可以写为
+      无状态的函数组件
+
+      智能组件考虑更多的事务逻辑操作性问题，有自己的state，并不关注UI怎么呈现
+      这样有利于组件复用和维护
+    </pre>
+    <div id="root"></div>
+    <script type="text/babel">
+      //木偶组件 
+      class CommentList extends React.Component {
+        constructor(props) {
+          super(props);
+        }
+
+        render() {
+          console.log(this.props)
+          return (
+            <ul>
+              {this.props.languages.map(function(language){
+                return(
+                  <ul key={language.id}>
+                    <li>{language.name}</li>
+                  </ul>
+                );
+              })}
+            </ul>
+          )
+        }
+      }
+
+      //智能组件
+      class CommentContainer extends React.Component {
+        constructor() {
+          super();
+          this.state = {
+            languages: []
+          };
+        }
+
+        componentDidMount() {
+          $.ajax({
+            url: "data.json",
+            dataType: "json",
+            success: function(languages) {
+              this.setState({languages: languages});
+            }.bind(this)
+          });
+        }
+
+        render() {
+          return <CommentList languages={this.state.languages}/>
+        }
+      }
+      ReactDOM.render(<CommentContainer />, document.getElementById('root'));
+    </script>
+</body>
+</html>
