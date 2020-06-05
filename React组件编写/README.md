@@ -13,4 +13,4 @@
 
 run `npm install -g http-server` 
 
-then in this file, run `http-server` and you can use local file
+then in this file, run `http-server` and you can use local files
