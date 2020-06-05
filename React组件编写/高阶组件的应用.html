@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>高阶组件的应用</title>
+  <script src="https://cdn.bootcss.com/react/16.13.1/umd/react.development.js"></script>
+  <script src="https://cdn.bootcss.com/react-dom/16.13.1/umd/react-dom.development.js"></script>
+  <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    function HOC(WrappedComponent) { //高阶组件，用来加工被包装组件
+      return class extends React.Component{
+        render() {
+          return (
+            <div>
+              <h1>高阶组件加工</h1>
+              <WrappedComponent />
+            </div>
+          )
+        }
+      }
+    }
+
+    class Hello extends React.Component {
+      render() {
+        return (
+          <div>被包装组件</div>
+        )
+      }
+    }
+    var New = HOC(Hello);
+    ReactDOM.render(<New />,document.getElementById('root'));
+
+  </script>
+</body>
+</html>
