@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>高阶组件-属性代理</title>
+  <script src="https://cdn.bootcss.com/react/16.13.1/umd/react.development.js"></script>
+  <script src="https://cdn.bootcss.com/react-dom/16.13.1/umd/react-dom.development.js"></script>
+  <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+  <pre>
+    基础组件，也就是需要被包装的组件，其自身可能会有一些props和state属性，
+    高阶组件工厂可能修改props属性，加工后得到的新组件props或者state是修改
+    后的属性值，即属性代理。
+  </pre>
+  <div id="root"></div>
+  <script type="text/babel">
+    function HOC(WrappedComponent) {
+      return class extends React.Component {
+        render() {
+          const newProps = {
+            name : "打开console查看工厂后的组件props",
+            language : "JavaScript"
+          }
+          return (
+            <div>
+              <h1>高阶工厂组件</h1>
+              <WrappedComponent {...this.props} {...newProps}/>
+            </div>
+          )
+        }
+      }
+    }
+
+    class Hello extends React.Component {
+      static defaultProps = {
+        name : "Hello React "
+      }
+      componentDidMount() {
+        console.log(this.props);
+      }
+      render() {
+        return (
+          <div>{this.props.name}</div>
+        )
+      }
+    }
+
+    var New = HOC(Hello);
+    ReactDOM.render(<New />, document.getElementById('root'));
+
+  </script>
+</body>
+</html>

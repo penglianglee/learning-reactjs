@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>高阶组件-反向继承</title>
+  <script src="https://cdn.bootcss.com/react/16.13.1/umd/react.development.js"></script>
+  <script src="https://cdn.bootcss.com/react-dom/16.13.1/umd/react-dom.development.js"></script>
+  <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+  <pre>
+    高阶组件中传入的基础组件会被高阶组件继承。这样使基础组件成为父类，高阶组件
+    成为子类，即为反向继承
+  </pre>
+  <div id="root"></div>
+  <script type="text/babel">
+    function HOC(WrappedComponent) {
+      return class extends WrappedComponent {
+        componentDidMount() {
+          this.setState({
+            isShow: true
+          })
+        }
+        render() {
+          return (
+            super.render()
+          )
+        }
+      }
+    }
+
+    class Hello extends React.Component {
+      constructor() {
+        super();
+        this.state = {
+          isShow : false
+        }
+      }
+      render() {
+        console.log(this.state);
+        return (
+          <div>{this.state.isShow?"Hello React":""}</div>
+        )
+      }
+    }
+
+    var New = HOC(Hello);
+    ReactDOM.render(<New />, document.getElementById('root'));
+
+  </script>
+</body>
+</html>
