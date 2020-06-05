@@ -8,3 +8,9 @@
 <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 ```
+
+> to load data.json file, you need to add a local http-server:
+
+run `npm install -g http-server` 
+
+then in this file, run `http-server` and you can use local file
