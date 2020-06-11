@@ -1,5 +1,6 @@
 ### note
-> this file includes single html pages that implement react components
+> React在View层做得很优秀了，但却未涉及Model层和Controller层，于是乎，为了填充React的空白，
+用于处理和管理数据的Flux诞生了，后来经过改进，又演变出了Redux
 
 > react source:
 ```
